@@ -50,7 +50,9 @@ function toggleSidebar() {
   if (isMobile) {
     // 모바일에서는 사이드바를 열고 닫기
     if (sidebar.classList.contains("open")) {
-      closeSidebar();
+      collapseSidebar();
+    } else if (sidebar.classList.contains("collapsed")) {
+      expandSidebar();
     } else {
       openSidebar();
     }
@@ -84,6 +86,7 @@ function closeSidebar() {
 function collapseSidebar() {
   sidebar.classList.add("collapsed");
   mainContent.classList.add("expanded");
+  mainContent.style.marginLeft = "52px";
   sidebarCollapsed = true;
 }
 
@@ -91,6 +94,7 @@ function collapseSidebar() {
 function expandSidebar() {
   sidebar.classList.remove("collapsed");
   mainContent.classList.remove("expanded");
+  mainContent.style.marginLeft = "240px";
   sidebarCollapsed = false;
 }
 
@@ -146,7 +150,7 @@ function setupResizeObserver() {
         } else {
           // 데스크톱으로 전환
           sidebar.classList.remove("open");
-          mainContent.style.marginLeft = sidebarCollapsed ? "72px" : "240px";
+          mainContent.style.marginLeft = sidebarCollapsed ? "0" : "240px";
           removeOverlay();
         }
       }
