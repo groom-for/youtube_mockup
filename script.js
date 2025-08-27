@@ -51,6 +51,7 @@ function toggleSidebar() {
     // 모바일에서는 사이드바를 열고 닫기
     if (sidebar.classList.contains("open")) {
       collapseSidebar();
+      removeOverlay();
     } else if (sidebar.classList.contains("collapsed")) {
       expandSidebar();
     } else {
@@ -62,6 +63,7 @@ function toggleSidebar() {
       expandSidebar();
     } else {
       collapseSidebar();
+      console.log("collapsed");
     }
   }
 }
