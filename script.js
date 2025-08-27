@@ -90,6 +90,14 @@ function collapseSidebar() {
   mainContent.classList.add("expanded");
   mainContent.style.marginLeft = "52px";
   sidebarCollapsed = true;
+
+  // collapsed-nav-section 영역을 숨김
+  const collapsedNavSections = sidebar.querySelectorAll(
+    ".collapsed-nav-section"
+  );
+  collapsedNavSections.forEach((section) => {
+    section.style.display = "none";
+  });
 }
 
 // 데스크톱에서 사이드바 확장
@@ -99,6 +107,14 @@ function expandSidebar() {
   mainContent.classList.remove("expanded");
   mainContent.style.marginLeft = "240px";
   sidebarCollapsed = false;
+
+  // collapsed-nav-section 영역을 다시 표시
+  const collapsedNavSections = sidebar.querySelectorAll(
+    ".collapsed-nav-section"
+  );
+  collapsedNavSections.forEach((section) => {
+    section.style.display = "block";
+  });
 }
 
 // 오버레이 생성 (모바일용)

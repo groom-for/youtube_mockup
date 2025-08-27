@@ -153,7 +153,12 @@ body {
 }
 
 .nav-section {
-  margin-bottom: 8px;
+  margin: 0 8px 8px 8px;
+}
+
+/* collapsed 상태일 때 nav-section 마진 제거 */
+.sidebar.collapsed .nav-section {
+  margin: 0;
 }
 
 .nav-title {
@@ -168,7 +173,7 @@ body {
   display: flex;
   align-items: center;
   gap: 24px;
-  padding: 8px 24px;
+  padding: 8px 0px 8px 24px;
   height: 40px;
   text-decoration: none;
   color: #030303;
@@ -191,6 +196,11 @@ body {
   width: 24px;
   text-align: center;
 }
+.nav-item svg {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
 
 .nav-item span {
   font-size: 14px;
@@ -199,17 +209,51 @@ body {
   text-overflow: ellipsis;
 }
 
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
 /* 사이드바 축소 시 아이콘만 표시 */
-.sidebar.collapsed .nav-item span,
+
 .sidebar.collapsed .nav-title {
   display: none;
 }
 
+.divider {
+  height: 1px;
+  background-color: #e5e5e5;
+  margin: 8px 0;
+}
+
+.divider-text {
+  font-size: 18px;
+  color: #030303;
+}
+
+.sidebar.collapsed .nav-item span {
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
 .sidebar.collapsed .nav-item {
   justify-content: center;
   gap: 0;
-  padding: 12px 8px;
+  padding: 8px 4px;
   margin: 0 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 74px;
+  gap: 8px;
+  overflow: hidden;
 }
 
 .sidebar.collapsed .nav-item i {
@@ -221,6 +265,7 @@ body {
 /* collapsed 상태에서 사이드바 너비 조정 */
 .sidebar.collapsed {
   width: 72px;
+  min-width: 72px;
 }
 
 /* collapsed 상태에서 네비게이션 섹션 간격 조정 */
