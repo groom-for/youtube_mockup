@@ -38,7 +38,6 @@ function checkScreenSize() {
     mainContent.style.marginLeft = "0";
   } else {
     // 데스크톱에서는 사이드바를 기본적으로 표시
-    sidebar.classList.remove("collapsed");
     sidebar.classList.remove("open");
     mainContent.classList.remove("expanded");
     mainContent.style.marginLeft = "240px";
@@ -86,6 +85,7 @@ function closeSidebar() {
 
 // 데스크톱에서 사이드바 축소
 function collapseSidebar() {
+  console.log("축소");
   sidebar.classList.add("collapsed");
   mainContent.classList.add("expanded");
   mainContent.style.marginLeft = "52px";
@@ -94,6 +94,7 @@ function collapseSidebar() {
 
 // 데스크톱에서 사이드바 확장
 function expandSidebar() {
+  console.log("확장");
   sidebar.classList.remove("collapsed");
   mainContent.classList.remove("expanded");
   mainContent.style.marginLeft = "240px";

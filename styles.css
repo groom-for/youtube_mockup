@@ -136,7 +136,7 @@ body {
   width: 240px;
   background-color: white;
   overflow-y: auto;
-  transition: width 0.3s ease;
+  transition: all 0.3s ease;
   position: fixed;
   top: 56px;
   left: 0;
@@ -199,7 +199,7 @@ body {
   text-overflow: ellipsis;
 }
 
-/* 사이드바 축소 시 텍스트 숨김 */
+/* 사이드바 축소 시 아이콘만 표시 */
 .sidebar.collapsed .nav-item span,
 .sidebar.collapsed .nav-title {
   display: none;
@@ -209,10 +209,64 @@ body {
   justify-content: center;
   gap: 0;
   padding: 12px 8px;
+  margin: 0 4px;
 }
 
 .sidebar.collapsed .nav-item i {
   font-size: 20px;
+  width: 24px;
+  text-align: center;
+}
+
+/* collapsed 상태에서 사이드바 너비 조정 */
+.sidebar.collapsed {
+  width: 72px;
+}
+
+/* collapsed 상태에서 네비게이션 섹션 간격 조정 */
+.sidebar.collapsed .nav-section {
+  margin-bottom: 4px;
+}
+
+/* collapsed 상태에서 활성 아이템 스타일 */
+.sidebar.collapsed .nav-item.active {
+  background-color: #e5e5e5;
+  border-radius: 8px;
+}
+
+/* collapsed 상태에서 호버 효과 개선 */
+.sidebar.collapsed .nav-item:hover {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+/* collapsed 상태에서 아이콘 중앙 정렬 */
+.sidebar.collapsed .nav-item {
+  position: relative;
+}
+
+/* collapsed 상태에서 툴팁 효과 (선택사항) */
+.sidebar.collapsed .nav-item::after {
+  content: attr(data-title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  margin-left: 8px;
+  z-index: 1000;
+}
+
+.sidebar.collapsed .nav-item:hover::after {
+  opacity: 1;
 }
 
 /* 메인 콘텐츠 */
