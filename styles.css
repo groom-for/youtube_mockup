@@ -41,7 +41,9 @@ body {
   cursor: pointer;
   padding: 8px;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
+  width: 40px;
+  height: 40px;
 }
 
 .menu-btn:hover {
@@ -88,7 +90,7 @@ body {
 .search-btn {
   background-color: #f8f8f8;
   border: none;
-  padding: 8px 24px;
+  padding: 12px 24px;
   cursor: pointer;
   border-left: 1px solid #ccc;
   transition: background-color 0.2s;
@@ -135,54 +137,69 @@ body {
 .sidebar {
   width: 240px;
   background-color: white;
-  overflow-y: auto;
+  overflow-y: overlay;
+  scrollbar-gutter: stable;
   transition: all 0.3s ease;
   position: fixed;
   top: 56px;
   left: 0;
   height: calc(100vh - 56px);
   z-index: 999;
+   box-sizing: border-box; /* 패딩 때문에 크기 튀는 거 방지 */
+ 
 }
 
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar:hover{
+  scrollbar-width: thin;
+}
 .sidebar.collapsed {
   width: 72px;
 }
 
 .sidebar-nav {
-  padding: 12px 0;
+  margin: 12px 0 0 0;
+   box-sizing: border-box; 
 }
 
 .nav-section {
-  margin: 0 8px 8px 8px;
+  margin : 0 12px 12px 12px;
 }
 
-/* collapsed 상태일 때 nav-section 마진 제거 */
 .sidebar.collapsed .nav-section {
   margin: 0;
 }
 
-.nav-title {
-  font-size: 14px;
+
+.nav-title, .nav-title-h3{
+  display: flex;
+  align-items: center;
+  font-size: 16px;
   font-weight: 500;
-  color: #606060;
-  padding: 8px 24px;
-  margin-top: 8px;
+  padding: 0px 12px;
+  height: 40px;
+  text-decoration: none;
+  color: #030303;
+  transition: background-color 0.1s;
+  border-radius: 10px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 24px;
-  padding: 8px 0px 8px 24px;
+  padding: 8px 12px;
   height: 40px;
   text-decoration: none;
   color: #030303;
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
   border-radius: 10px;
-  margin: 0 8px;
 }
 
-.nav-item:hover {
+.nav-item:hover, .nav-title:hover {
   background-color: #f2f2f2;
 }
 
@@ -323,7 +340,7 @@ body {
 }
 
 .main-content.expanded {
-  margin-left: 36px;
+  margin-left: 75px;
 }
 
 .content-header {
@@ -362,12 +379,16 @@ body {
   width: 100%;
   aspect-ratio: 16/9;
   overflow: hidden;
+  border-radius:  12px;
 }
 
-.video-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.video-thumbnail iframe {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-50%);
 }
 
 .video-duration {
@@ -396,11 +417,13 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
+   object-fit: cover;
 }
 
 .video-details {
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
 .video-title {
@@ -413,6 +436,21 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   color: #030303;
+  padding-right:25px;
+}
+.video-icon{
+  position: absolute;
+  right: -8px;
+  top : -8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-align: center;
+  align-content: center;
+}
+
+.video-icon:hover{
+    background-color: #e5e5e5;
 }
 
 .channel-name {
@@ -426,6 +464,32 @@ body {
   color: #606060;
 }
 
+.side-footer{
+  padding: 0px 12px 12px 24px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.side-footer a{
+ margin-right: 4px;
+  text-decoration: none;
+  color:#606060;
+}
+
+.side-footer-info{
+  padding: 4px 8px 16px 24px;
+  font-size: 12px;
+}
+.side-footer-info span{
+  text-decoration: none;
+  color:#9c9c9c;
+}
+.side-footer-info a{
+  text-decoration: none;
+  color:rgb(6, 105, 255);
+}
+.fa-youtube{
+  color:red;
+}
 /* 반응형 디자인 */
 @media (max-width: 1200px) {
   .video-grid {
@@ -649,7 +713,7 @@ body {
   overflow: hidden;
 }
 
-.short-video-thumbnail img {
+.short-video-thumbnail iframe {
   width: 100%;
   height: 100%;
   object-fit: cover;
