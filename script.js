@@ -39,8 +39,12 @@ function checkScreenSize() {
   } else {
     // 데스크톱에서는 사이드바를 기본적으로 표시
     sidebar.classList.remove("open");
-    mainContent.classList.remove("expanded");
-    mainContent.style.marginLeft = "240px";
+     if (sidebarCollapsed) {
+      mainContent.classList.add("expanded");
+    } else {
+      mainContent.classList.remove("expanded");
+       mainContent.style.marginLeft = "240px";
+    }
   }
 }
 
@@ -88,7 +92,7 @@ function collapseSidebar() {
   console.log("축소");
   sidebar.classList.add("collapsed");
   mainContent.classList.add("expanded");
-  mainContent.style.marginLeft = "52px";
+  mainContent.style.marginLeft = "75px";
   sidebarCollapsed = true;
 
   // collapsed-nav-section 영역을 숨김
@@ -119,6 +123,12 @@ function expandSidebar() {
 
 // 오버레이 생성 (모바일용)
 function createOverlay() {
+    const collapsedNavSections = sidebar.querySelectorAll(
+    ".collapsed-nav-section"
+  );
+  collapsedNavSections.forEach((section) => {
+    section.style.display = "block";
+  });
   const overlay = document.createElement("div");
   overlay.className = "sidebar-overlay open";
   overlay.addEventListener("click", closeSidebar);
