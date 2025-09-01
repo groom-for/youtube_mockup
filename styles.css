@@ -187,6 +187,7 @@ body {
   border-radius: 10px;
 }
 
+
 .nav-item {
   display: flex;
   align-items: center;
@@ -353,6 +354,11 @@ body {
   color: #030303;
 }
 
+.content-header h1 img {
+  max-height: 20px;
+
+}
+
 /* 비디오 그리드 */
 .video-grid {
   display: grid;
@@ -369,27 +375,122 @@ body {
   cursor: pointer;
 }
 
-.video-card:hover {
+/* .video-card:hover {    
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+} */
 
+
+/* 비디오 썸네일 영역 스타일 */
 .video-thumbnail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  border-radius:  12px;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
-.video-thumbnail iframe {
+/* iframe과 img 썸네일 공통 규칙 */
+.video-thumbnail iframe,
+.video-thumbnail img.thumb {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    transform: translateY(-50%);
+    object-fit: cover;
+    border: 0;
 }
+
+/* 기본 상태: 썸네일 이미지는 보이고, iframe은 숨겨져 있습니다. */
+.video-thumbnail iframe {
+    display: none;
+}
+.video-thumbnail img.thumb {
+    display: block;
+}
+
+/* 마우스 오버 시: 썸네일 이미지를 숨기고 iframe을 보이게 함 (미리보기)*/
+.video-thumbnail:hover img.thumb {
+    display: none;
+}
+.video-thumbnail:hover iframe {
+    display: block;
+} */
+
+/* **[핵심]** 영상이 재생 중일 때: is-playing 클래스가 추가되면 이 규칙이 우선 적용됩니다. */
+.video-thumbnail.is-playing img.thumb {
+    display: none;
+}
+.video-thumbnail.is-playing iframe {
+    display: block;
+}
+
+
+/* **여기서 기존의 마우스 오버 CSS 규칙을 제거했습니다.** */
+
+
+/* 재생시간 */
+.video-duration {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* hover 버튼 */
+.hover-buttons {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 3;
+}
+
+.video-thumbnail:hover .hover-buttons {
+  opacity: 1;
+}
+
+.hover-buttons .btn {
+  background: rgba(0,0,0,0.6);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hover-buttons .btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* 마우스 올리면 버튼 나타남 */
+.video-thumbnail:hover .hover-buttons {
+  opacity: 1;
+}
+
+/* iframe은 기본 숨김 (필요하면 JS로 토글) */
+.video-thumbnail iframe.video-iframe {
+  display: none;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
 
 .video-duration {
   position: absolute;
@@ -701,11 +802,6 @@ body {
   cursor: pointer;
 }
 
-.short-video-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
 .short-video-thumbnail {
   position: relative;
   width: 100%;
@@ -713,10 +809,31 @@ body {
   overflow: hidden;
 }
 
-.short-video-thumbnail iframe {
+.short-video-thumbnail iframe,
+.short-video-thumbnail img.thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border: 0;
+}
+
+/* 기본 상태: 썸네일은 보이고 아이프레임은 숨김 */
+.short-video-thumbnail iframe {
+  display: none;
+}
+.short-video-thumbnail img.thumb {
+  display: block;
+}
+
+/* 마우스 오버 시: 썸네일을 숨기고 아이프레임을 표시 */
+.short-video-card:hover .short-video-thumbnail iframe {
+  display: block;
+}
+.short-video-card:hover .short-video-thumbnail img.thumb {
+  display: none;
 }
 
 /* Short Video Grid 반응형 */
@@ -756,3 +873,5 @@ body {
     border-radius: 8px;
   }
 }
+
+
